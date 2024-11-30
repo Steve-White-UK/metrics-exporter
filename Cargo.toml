@@ -1,0 +1,42 @@
+[package]
+name = "metrics-exporter"
+version = "0.16.0"
+edition = "2021"
+
+[dependencies]
+base64 = { version = "0.22",  features = ["std"] }
+http-body-util = { version = "0.1" }
+hyper = { version = "1.1",  features = ["server", "client"] }
+hyper-rustls = { version = "0.27",  features = ["aws-lc-rs", "http1", "rustls-native-certs"] }
+hyper-util = { version = "0.1",  features = ["tokio", "service", "client", "client-legacy", "http1"] }
+
+indexmap = { version = "2.6",  features = ["std"] }
+ipnet = { version = "2", features = ["std"] }
+metrics = { version = "^0.24" }
+metrics-util = { version = "^0.18", features = [
+    "recency",
+    "registry",
+    "summary",
+] }
+quanta = { version = "0.12" }
+thiserror = { version = "1" }
+tokio = { version = "1",  features = ["rt", "net", "time", "rt-multi-thread"] }
+tracing = { version = "0.1" }
+
+[dev-dependencies]
+proptest = { version = "1",features = ["std"] }
+rand = { version = "0.8", features = ["std", "std_rng"] }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3" }
+
+[[example]]
+name = "prometheus_push_gateway"
+required-features = ["push-gateway"]
+
+[[example]]
+name = "prometheus_server"
+required-features = ["http-listener"]
+
+[[example]]
+name = "prometheus_uds_server"
+required-features = ["uds-listener"]
